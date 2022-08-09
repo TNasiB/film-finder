@@ -1,31 +1,11 @@
 <template>
   <div class="app-header">
-    <span class="app-header__logo">FilmFinder</span>
+    <p class="app-header__logo">
+      <n-icon @click="$emit('toggle-sidebar')" class="app-header__logo-icon">
+        <grid-view-sharp /> </n-icon
+      ><span>FilmFinder</span>
+    </p>
     <div class="app-header__side-wrapper">
-      <div class="app-header__search-container">
-        <n-dropdown
-          trigger="hover"
-          :options="findValue.films"
-          label-field="nameRu"
-          @select="handleSelect"
-        >
-          <n-input
-            v-model:value="findValue.query"
-            class="app-header__search"
-            size="small"
-            @change="findFilm"
-            ><template #suffix
-              ><n-icon><search-round /></n-icon></template
-          ></n-input>
-        </n-dropdown>
-        <!-- <div class="app-header__finded-list">
-          <film-card-small
-            v-for="film in findValue.films"
-            :key="film.id"
-            v-bind="film"
-          />
-        </div> -->
-      </div>
       <n-avatar
         round
         size="large"
@@ -37,20 +17,15 @@
 
 <script setup>
 import { reactive } from "vue";
-import { NAvatar, NInput, NIcon, NDropdown } from "naive-ui";
-import { SearchRound } from "@vicons/material";
+import { NAvatar, NIcon } from "naive-ui";
+import { GridViewSharp } from "@vicons/material";
 import { useMovieStore } from "../stores/movies.js";
-import FilmCardSmall from "@/components/FilmCardSmall.vue";
 
 const movieStore = useMovieStore();
 const findValue = reactive({
   query: "",
   films: [],
 });
-const findFilm = () =>
-  movieStore
-    .findFilm(findValue.query)
-    .then(({ data }) => (findValue.films = data.films));
 </script>
 
 <style lang="scss" scoped>
@@ -71,6 +46,20 @@ const findFilm = () =>
   &__logo {
     font-weight: 700;
     color: #fff;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    user-select: none;
+  }
+
+  &__logo-icon {
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 
   &__side-wrapper {

@@ -1,6 +1,6 @@
 <template>
   <n-scrollbar
-    content-style="display: flex; gap: 10px; flex-wrap: wrap; padding-right: 15px;"
+    content-style="display: flex; gap: 10px; flex-wrap: wrap; padding: 70px 15px 180px 0;"
     style="max-height: 100%"
     :on-scroll="checkScroll"
   >
@@ -10,13 +10,12 @@
       :key="film.filmId"
       v-bind="film"
     />
-    <n-spin :show="show"> </n-spin>
   </n-scrollbar>
 </template>
 
 <script setup>
 import { useMovieStore } from "@/stores/movies.js";
-import { NScrollbar, NSpin } from "naive-ui";
+import { NScrollbar } from "naive-ui";
 import FilmCard from "@/components/FilmCard.vue";
 import router from "@/router";
 import { ref } from "vue";

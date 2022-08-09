@@ -70,11 +70,15 @@ const logIn = () => {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: blur(25px);
-    -moz-filter: blur(25px);
-    -o-filter: blur(25px);
-    -ms-filter: blur(25px);
-    filter: blur(25px);
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(25px);
+      pointer-events: none;
+    }
   }
 }
 </style>

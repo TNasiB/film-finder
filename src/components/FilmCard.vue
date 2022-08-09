@@ -2,30 +2,10 @@
   <div
     class="film-card"
     :style="`background-image: url(${props.posterUrlPreview}) `"
-  >
-    <n-tag type="success" class="film-card__year">{{ props.year }}</n-tag>
-    <n-tag class="film-card__title">{{ props.nameRu }}</n-tag>
-  </div>
-  <!-- <n-card class="film-card" hoverable>
-    <template #header>
-      <p class="flilm-card__title">{{ nameRu }}</p>
-    </template>
-    <template #header-extra>
-      <n-rate readonly :default-value="definedRate" size="small" />
-    </template>
-    <template #cover>
-      
-    </template>
-    <div class="film-card__content"></div>
-    <template #footer> #footer </template>
-    <template #action> #action </template>
-  </n-card> -->
+  ></div>
 </template>
 
 <script setup>
-import { NTag } from "naive-ui";
-import { defineProps } from "vue";
-
 const props = defineProps({
   nameRu: { type: String, required: true },
   filmId: { type: Number, required: true },
@@ -56,6 +36,12 @@ const props = defineProps({
   -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  transform: scale(1);
+  transition: transform 0.1s;
+
+  &:hover {
+    transform: scale(1.01);
+  }
 
   &__title {
     color: #000;

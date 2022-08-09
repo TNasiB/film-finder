@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <app-header></app-header>
+    <app-header @toggle-sidebar="drawerShow = !drawerShow"></app-header>
     <div class="app__workplace">
       <router-view></router-view>
     </div>
@@ -9,6 +9,10 @@
         <movie-player v-bind="params" />
       </template>
     </vue-final-modal>
+    <side-bar-filter
+      :drawerShow="drawerShow"
+      @hide-sidebar="drawerShow = false"
+    />
   </div>
 </template>
 
@@ -18,9 +22,11 @@ import { checkTokenFilm } from "./services/movieApi";
 import { VueFinalModal } from "vue-final-modal";
 import AppHeader from "@/components/AppHeader.vue";
 import MoviePlayer from "@/components/MoviePlayer.vue";
+import SideBarFilter from "@/components/SideBarFilter.vue";
 
 checkTokenFilm();
 
+const drawerShow = ref(false);
 const playerEnable = ref(false);
 </script>
 
