@@ -21,11 +21,11 @@
         </div>
       </template>
       <n-form class="side-bar-filter__form">
-        <n-input placeholder="Film name" />
+        <n-input placeholder="Film name" v-model:value="form.keyword" />
         <n-select placeholder="Select Country"></n-select>
         <p>rating</p>
         <n-slider v-model:value="form.rating" range :step="1" />
-        <n-button type="info">Accept</n-button>
+        <n-button type="info" @click="findByFilters">Accept</n-button>
       </n-form>
     </n-drawer-content>
   </n-drawer>
@@ -33,6 +33,7 @@
 
 <script setup>
 import { reactive } from "vue";
+import { useMovieStore } from "@/stores/movies.js";
 import {
   NDrawer,
   NDrawerContent,
@@ -49,10 +50,15 @@ defineProps({ drawerShow: { type: Boolean, required: true } });
 defineEmits(["hide-sidebar"]);
 
 const form = reactive({
-  name: "",
+  keyword: "",
   country: "",
   rating: [0, 10],
 });
+
+const findByFilters = () => {
+  const { country, rating, ...rest } = form;
+  useMovieStore().findFilmsByFilter(rest);
+};
 </script>
 
 <style lang="scss" scoped>

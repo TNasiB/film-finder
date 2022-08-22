@@ -8,13 +8,14 @@
 <script setup>
 const props = defineProps({
   nameRu: { type: String, required: true },
-  filmId: { type: Number, required: true },
+  filmId: { type: Number, default: null },
   year: { type: String, required: true },
   genres: { type: Array, required: true },
   rating: { type: String, required: true },
   ratingVoteCount: { type: Number, required: true },
   posterUrl: { type: String, required: true },
   posterUrlPreview: { type: String, required: true },
+  kinopoiskId: { type: Number, default: null },
 });
 </script>
 

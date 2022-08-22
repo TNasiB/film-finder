@@ -1,5 +1,9 @@
 import { defineStore } from "pinia";
-import { fetchTop, findFilm } from "../services/movieApi/rest/fetchTop";
+import {
+  fetchTop,
+  findFilm,
+  fetchFilmFilter,
+} from "../services/movieApi/rest/fetchTop";
 
 export const useMovieStore = defineStore("movies", {
   state: () => ({ movies: [] }),
@@ -12,6 +16,11 @@ export const useMovieStore = defineStore("movies", {
     },
     findFilm(keyword) {
       return findFilm(keyword);
+    },
+    findFilmsByFilter(form) {
+      return fetchFilmFilter(form).then(
+        ({ data }) => (this.movies = data.items)
+      );
     },
   },
 });

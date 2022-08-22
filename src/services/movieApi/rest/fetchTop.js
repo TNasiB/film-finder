@@ -11,6 +11,12 @@ export const fetchFilm = (id) =>
     url: `v2.2/films/${id}`,
   });
 
+export const fetchFilmFilter = (params) =>
+  makeRequest({
+    url: "v2.2/films/",
+    params,
+  });
+
 export const findFilm = (keyword) =>
   makeRequest({
     url: "v2.1/films/search-by-keyword",

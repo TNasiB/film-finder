@@ -5,7 +5,7 @@
     :on-scroll="checkScroll"
   >
     <FilmCard
-      @click="showMoreInformation(film.filmId)"
+      @click="showMoreInformation(film.filmId || film.kinopoiskId)"
       v-for="film in moviesStore.movies"
       :key="film.filmId"
       v-bind="film"
