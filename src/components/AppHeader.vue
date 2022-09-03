@@ -4,8 +4,18 @@
       <n-icon @click="$emit('toggle-sidebar')" class="app-header__logo-icon">
         <grid-view-sharp /> </n-icon
       ><span>FilmFinder</span>
+      <div class="app-header__select-type">
+      <span class="app-header__select-item">Movies</span>
+      <span class="app-header__select-item">Series</span>
+    </div>
     </p>
     <div class="app-header__side-wrapper">
+      <n-input-group>
+        <n-input />
+        <n-button ghost>
+          Search
+        </n-button>
+    </n-input-group>
       <n-avatar
         round
         size="large"
@@ -17,7 +27,7 @@
 
 <script setup>
 import { reactive } from "vue";
-import { NAvatar, NIcon } from "naive-ui";
+import { NAvatar, NIcon, NInput, NInputGroup, NButton } from "naive-ui";
 import { GridViewSharp } from "@vicons/material";
 import { useMovieStore } from "../stores/movies.js";
 
@@ -42,7 +52,7 @@ const findValue = reactive({
   background-color: #000;
   padding: 5px 20px;
   font-size: 25px;
-
+  color: #fff;
   &__logo {
     font-weight: 700;
     color: #fff;
@@ -78,6 +88,16 @@ const findValue = reactive({
     background-color: #fff;
     padding: 5px;
     position: absolute;
+  }
+
+  &__select-type {
+    display: flex;
+    gap: 10px;
+    font-weight: 700;
+  }
+
+  &__select-item {
+    cursor: pointer;
   }
 }
 </style>

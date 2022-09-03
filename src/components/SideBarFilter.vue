@@ -21,7 +21,6 @@
         </div>
       </template>
       <n-form class="side-bar-filter__form">
-        <n-input placeholder="Film name" v-model:value="form.keyword" />
         <n-select placeholder="Select Country"></n-select>
         <p>rating</p>
         <n-slider v-model:value="form.rating" range :step="1" />
@@ -39,7 +38,6 @@ import {
   NDrawerContent,
   NIcon,
   NForm,
-  NInput,
   NButton,
   NSelect,
   NSlider,
@@ -50,7 +48,6 @@ defineProps({ drawerShow: { type: Boolean, required: true } });
 defineEmits(["hide-sidebar"]);
 
 const form = reactive({
-  keyword: "",
   country: "",
   rating: [0, 10],
 });
