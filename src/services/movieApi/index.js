@@ -5,20 +5,21 @@ axios.defaults.baseURL = "https://kinopoiskapiunofficial.tech/api/";
 function getCookie(name) {
   let matches = document.cookie.match(
     new RegExp(
-      "(?:^|; )" +
-        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-        "=([^;]*)"
+      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") + "=([^;]*)"
     )
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
 export const checkTokenFilm = () => {
-  if (getCookie("filmApiToken")) {
-    axios.defaults.headers["X-API-KEY"] = getCookie("filmApiToken");
+  const token = getCookie("filmApiToken");
+  if (token) {
+    axios.defaults.headers["X-API-KEY"] = token;
     router.push("/");
+    return token;
   } else {
     router.push("/auth");
+    return;
   }
 };
 

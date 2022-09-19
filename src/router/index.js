@@ -15,7 +15,14 @@ const routes = [
     component: () => import("../views/MoviePage.vue"),
     props: true,
   },
+  {
+    path: "/:keyword/results",
+    name: "keyword",
+    component: () => import("../views/FindResultsPage.vue"),
+    props: true,
+  },
 ];
+
 const router = createRouter({
   history: createWebHistory(),
   routes,

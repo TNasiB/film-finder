@@ -11,27 +11,42 @@
       <template #header>
         <div class="side-bar-filter__header">
           <p class="side-bar-filter__logo">
-            <n-icon
-              @click="$emit('hide-sidebar')"
-              class="side-bar-filter__logo-icon"
-            >
+            <n-icon @click="$emit('hide-sidebar')" class="side-bar-filter__logo-icon">
               <grid-view-sharp /> </n-icon
             ><span>FilmFinder</span>
           </p>
         </div>
       </template>
       <n-form class="side-bar-filter__form">
-        <n-select placeholder="Select Country"></n-select>
+        <n-select
+          v-model:value="form.country"
+          filterable
+          placeholder="Select Country"
+          :options="store.countries"
+          label-field="country"
+          value-field="id"
+        />
+        <n-select
+          v-model:value="form.genres"
+          filterable
+          placeholder="Select genre"
+          :options="store.genres"
+          label-field="genre"
+          value-field="id"
+        />
         <p>rating</p>
-        <n-slider v-model:value="form.rating" range :step="1" />
-        <n-button type="info" @click="findByFilters">Accept</n-button>
+        <n-slider v-model:value="rating" range :step="1" :max="10" :min="1" />
+        <p>year</p>
+        <n-slider v-model:value="year" range :step="1" :max="2022" :min="1850" />
+
+        <n-button type="info" @click="findByFilters">Find!</n-button>
       </n-form>
     </n-drawer-content>
   </n-drawer>
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useMovieStore } from "@/stores/movies.js";
 import {
   NDrawer,
@@ -44,17 +59,29 @@ import {
 } from "naive-ui";
 import { GridViewSharp } from "@vicons/material";
 
+const store = useMovieStore();
+
 defineProps({ drawerShow: { type: Boolean, required: true } });
 defineEmits(["hide-sidebar"]);
 
 const form = reactive({
   country: "",
-  rating: [0, 10],
+  yearFrom: null,
+  yearTo: null,
+  ratingFrom: null,
+  ratingTo: null,
 });
 
+const rating = ref([0, 10]);
+const year = ref([1800, 2022]);
+
 const findByFilters = () => {
-  const { country, rating, ...rest } = form;
-  useMovieStore().findFilmsByFilter(rest);
+  form.ratingFrom = year.value[0];
+  form.yearTo = year.value[1];
+  form.ratingTo = rating.value[1];
+  form.ratingFrom = rating.value[0];
+
+  store.findFilmsByFilter(form);
 };
 </script>
 

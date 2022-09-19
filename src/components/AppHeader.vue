@@ -1,7 +1,8 @@
 <template>
   <div class="app-header">
-    <p class="app-header__logo">
-      <n-icon @click="$emit('toggle-sidebar')" class="app-header__logo-icon">
+    <div class="app-header__container">
+      <p class="app-header__logo">
+      <n-icon color="#000" @click="$emit('toggle-sidebar')" class="app-header__logo-icon">
         <grid-view-sharp /> </n-icon
       ><span>FilmFinder</span>
       <div class="app-header__select-type">
@@ -11,51 +12,62 @@
     </p>
     <div class="app-header__side-wrapper">
       <n-input-group>
-        <n-input />
-        <n-button ghost>
-          Search
-        </n-button>
-    </n-input-group>
+        <n-input v-model:value="findValue" @keydown.enter="findFilm"/>
+        <n-button @click="findFilm">Search</n-button>
+      </n-input-group>
       <n-avatar
-        round
         size="large"
-        src="https://www.meme-arsenal.com/memes/b5e4d33d9a0a228e05b621bdcb2f7efe.jpg"
+        src="https://kartinkin.net/uploads/posts/2022-03/1646360045_3-kartinkin-net-p-kartinki-rik-3.png"
       />
+    </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { ref } from "vue";
 import { NAvatar, NIcon, NInput, NInputGroup, NButton } from "naive-ui";
 import { GridViewSharp } from "@vicons/material";
 import { useMovieStore } from "../stores/movies.js";
+import router from '@/router'
 
 const movieStore = useMovieStore();
-const findValue = reactive({
-  query: "",
-  films: [],
-});
+
+const findValue = ref('')
+//FIXME: ДОбавить историю поиска и просмотра
+const findFilm = () => {
+  if (findValue.value) {
+    movieStore.findFilm(findValue.value).then(() => {
+      router.push({
+        name: 'keyword',
+        params: { keyword: findValue.value }
+      })
+      findValue.value = ""
+    })
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 .app-header {
-  position: fixed;
   -webkit-box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6);
   -moz-box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6);
   box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6);
-  z-index: 1;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #000;
   padding: 5px 20px;
   font-size: 25px;
   color: #fff;
+  
+  &__container {
+    max-width: 1368px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   &__logo {
     font-weight: 700;
-    color: #fff;
+    color: #000;
     display: flex;
     gap: 20px;
     align-items: center;

@@ -1,10 +1,10 @@
-import { createApp } from "vue";
-import "./style.css";
 import App from "./App.vue";
 import router from "@/router";
-import { createPinia } from "pinia";
 import LoadScript from "vue-plugin-load-script";
+import "./style.css";
+import { createApp } from "vue";
 import { vfmPlugin } from "vue-final-modal";
+import { createPinia } from "pinia";
 
 const app = createApp(App);
 app.use(router);

@@ -1,11 +1,14 @@
 <template>
   <div
     class="film-card"
-    :style="`background-image: url(${props.posterUrlPreview}) `"
+    :style="`background-image: url(${props.posterUrlPreview})`"
+    @click="showMoreInformation"
   ></div>
 </template>
 
 <script setup>
+import router from "@/router";
+
 const props = defineProps({
   nameRu: { type: String, required: true },
   filmId: { type: Number, default: null },
@@ -17,22 +20,20 @@ const props = defineProps({
   posterUrlPreview: { type: String, required: true },
   kinopoiskId: { type: Number, default: null },
 });
+
+const showMoreInformation = () => {
+  router.push({ name: "movie", params: { id: props.filmId || props.kinopoiskId } });
+};
 </script>
 
 <style lang="scss" scoped>
 .film-card {
   width: 200px;
   height: 300px;
-  flex-grow: 1;
   cursor: pointer;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px;
   border-radius: 4px;
   -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
@@ -42,20 +43,6 @@ const props = defineProps({
 
   &:hover {
     transform: scale(1.01);
-  }
-
-  &__title {
-    color: #000;
-    max-width: 200px;
-    font-weight: 700;
-    white-space: break-spaces;
-    padding: 2px;
-  }
-
-  &__year {
-    align-self: flex-start;
-    background-color: #fff;
-    font-weight: 700;
   }
 }
 </style>

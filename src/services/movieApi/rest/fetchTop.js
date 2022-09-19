@@ -25,3 +25,9 @@ export const findFilm = (keyword) =>
       keyword,
     },
   });
+
+export const fecthFiltersInfo = () =>
+  makeRequest({
+    url: "v2.2/films/filters",
+    method: "GET",
+  });

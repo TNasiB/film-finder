@@ -12,6 +12,6 @@ import FilmList from "@/components/FilmList.vue";
 .main-page {
   display: flex;
   height: 100%;
-  padding: 0 20px 0;
+  padding: 0 0 0 20px;
 }
 </style>

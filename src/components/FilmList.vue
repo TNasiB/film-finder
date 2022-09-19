@@ -1,38 +1,29 @@
 <template>
-  <n-scrollbar
-    content-style="display: flex; gap: 10px; flex-wrap: wrap; padding: 70px 15px 180px 0;"
-    style="max-height: 100%"
-    :on-scroll="checkScroll"
-  >
-    <FilmCard
-      @click="showMoreInformation(film.filmId || film.kinopoiskId)"
-      v-for="film in moviesStore.movies"
-      :key="film.filmId"
-      v-bind="film"
-    />
-  </n-scrollbar>
+  <div class="film-list" @scroll="checkScroll">
+    <div class="film-list__wrapper">
+      <FilmCard v-for="film in moviesStore.movies" :key="film.filmId" v-bind="film" />
+    </div>
+  </div>
 </template>
 
 <script setup>
 import { useMovieStore } from "@/stores/movies.js";
-import { NScrollbar } from "naive-ui";
 import FilmCard from "@/components/FilmCard.vue";
-import router from "@/router";
 import { ref } from "vue";
 
 const moviesStore = useMovieStore();
+
 const uploadFilms = () => {
   moviesStore.fetchMovies(page.value).then(() => page.value++);
 };
+
 const page = ref(1);
+
 uploadFilms();
 
 let show = ref(true);
-moviesStore.fetchMovies().then(() => (show.value = false));
 
-const showMoreInformation = (id) => {
-  router.push({ name: "movie", params: { id } });
-};
+moviesStore.fetchMovies().then(() => (show.value = false));
 
 const checkScroll = (e) => {
   const { scrollHeight, scrollTop, clientHeight } = e.target;
@@ -42,9 +33,18 @@ const checkScroll = (e) => {
 
 <style lang="scss" scoped>
 .film-list {
-  height: 100%;
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  height: calc(100vh - 70px);
+  width: 100%;
+  overflow-y: scroll;
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 auto;
+    flex-grow: 1;
+    max-width: 1368px;
+    justify-content: center;
+  }
 }
 </style>
