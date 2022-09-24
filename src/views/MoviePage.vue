@@ -15,17 +15,11 @@
               {{ film.value.nameRu }} ({{ film.value.year }})
             </p>
             <p>{{ film.value.nameOriginal }}</p>
-            <n-rate
-              readonly
-              :default-value="film.value.ratingKinopoisk"
-              :count="10"
-            />
+            <n-rate readonly :default-value="film.value.ratingKinopoisk" :count="10" />
           </div>
           <div class="movie-page__article">
             <p class="movie-page__description">{{ film.value.description }}</p>
-            <p class="movie-page__duration">
-              Длительность: {{ movieDuration }}
-            </p>
+            <p class="movie-page__duration">Длительность: {{ movieDuration }}</p>
             <p class="movie-page__genres">
               Жанры:
               <span v-for="genre in film.value.genres" :key="genre.genre"
@@ -34,9 +28,7 @@
             </p>
             <p class="movie-page__genres">
               Страна:
-              <span
-                v-for="country in film.value.countries"
-                :key="country.country"
+              <span v-for="country in film.value.countries" :key="country.country"
                 >{{ country.country }},
               </span>
             </p>

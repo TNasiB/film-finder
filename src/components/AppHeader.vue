@@ -4,7 +4,7 @@
       <p class="app-header__logo">
       <n-icon color="#000" @click="$emit('toggle-sidebar')" class="app-header__logo-icon">
         <grid-view-sharp /> </n-icon
-      ><span>FilmFinder</span>
+      ><span style="cursor: pointer" @click="router.push('/')">FilmFinder</span>
       <div class="app-header__select-type">
       <span class="app-header__select-item">Movies</span>
       <span class="app-header__select-item">Series</span>
@@ -13,7 +13,7 @@
     <div class="app-header__side-wrapper">
       <n-input-group>
         <n-input v-model:value="findValue" @keydown.enter="findFilm"/>
-        <n-button @click="findFilm">Search</n-button>
+        <n-button type="info" @click="findFilm">Search</n-button>
       </n-input-group>
       <n-avatar
         size="large"

@@ -38,6 +38,5 @@ const playerEnable = ref(false);
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-  gap: 20px;
 }
 </style>
