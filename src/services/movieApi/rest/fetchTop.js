@@ -1,9 +1,9 @@
 import { makeRequest } from "../index";
 
-export const fetchTop = (data) =>
+export const fetchTop = (params) =>
   makeRequest({
     url: "v2.2/films/top",
-    params: { ...data },
+    params,
   });
 
 export const fetchFilm = (id) =>

@@ -41,10 +41,9 @@ const checkScroll = (e) => {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin: 0 auto;
     flex-grow: 1;
-    max-width: 1368px;
     justify-content: center;
+    flex-wrap: wrap;
   }
 }
 </style>

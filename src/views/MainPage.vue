@@ -1,5 +1,6 @@
 <template>
   <div class="main-page">
+    <p class="app__workplace-title">ТОП-250</p>
     <film-list />
   </div>
 </template>
@@ -12,7 +13,7 @@ import FilmList from "@/components/FilmList.vue";
 .main-page {
   display: flex;
   height: 100%;
-  padding: 0 0 0 20px;
-  margin-top: 20px;
+  flex-direction: column;
+  padding: 15px;
 }
 </style>

@@ -40,6 +40,7 @@ const showMoreInformation = () => {
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   transform: scale(1);
   transition: transform 0.1s;
+  flex-grow: 1;
 
   &:hover {
     transform: scale(1.01);
