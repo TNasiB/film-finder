@@ -28,8 +28,8 @@ const showMoreInformation = () => {
 
 <style lang="scss" scoped>
 .film-card {
-  width: 200px;
-  height: 300px;
+  width: 100px;
+  height: 150px;
   cursor: pointer;
   background-size: cover;
   background-repeat: no-repeat;

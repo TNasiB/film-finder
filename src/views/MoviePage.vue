@@ -3,8 +3,8 @@
     <div
       class="movie-page__bg"
       :style="`
-    background-image: url(${film.value?.posterUrl})
-  `"
+        background-image: url(${film.value?.posterUrl})
+      `"
     ></div>
     <div class="movie-page__info">
       <div class="movie-page__wrapper">
