@@ -4,6 +4,7 @@ import {
   findFilm,
   fetchFilmFilter,
   fecthFiltersInfo,
+  fetchPremiers,
 } from "../services/movieApi/rest/fetchTop";
 
 export const useMovieStore = defineStore("movies", {
@@ -12,6 +13,7 @@ export const useMovieStore = defineStore("movies", {
     findedFilms: [],
     genres: [],
     countries: [],
+    premiers: [],
   }),
   actions: {
     fetchMovies(page = 1) {
@@ -30,6 +32,9 @@ export const useMovieStore = defineStore("movies", {
       return fecthFiltersInfo().then(
         ({ data }) => ([this.genres, this.countries] = [data.genres, data.countries])
       );
+    },
+    fetchPremiersList(params) {
+      return fetchPremiers(params).then(({ data }) => (this.premiers = data.items));
     },
   },
 });

@@ -1,5 +1,15 @@
 <template>
   <div class="film-list" @scroll="checkScroll">
+    <n-carousel
+      :slides-per-view="1"
+      :space-between="20"
+      :loop="true"
+      draggable
+      autoplay
+      show-arrow
+    >
+      <carousel-film v-for="film in moviesStore.premiers" :key="film.id" v-bind="film" />
+    </n-carousel>
     <div class="film-list__wrapper">
       <FilmCard v-for="film in moviesStore.movies" :key="film.filmId" v-bind="film" />
     </div>
@@ -7,9 +17,11 @@
 </template>
 
 <script setup>
-import { useMovieStore } from "@/stores/movies.js";
-import FilmCard from "@/components/FilmCard.vue";
 import { ref } from "vue";
+import { useMovieStore } from "@/stores/movies.js";
+import { NCarousel } from "naive-ui";
+import FilmCard from "@/components/FilmCard.vue";
+import CarouselFilm from "@/components/CarouselFilm.vue";
 
 const moviesStore = useMovieStore();
 
@@ -20,6 +32,10 @@ const uploadFilms = () => {
 const page = ref(1);
 
 uploadFilms();
+moviesStore.fetchPremiersList({
+  year: "2022",
+  month: "OCTOBER",
+});
 
 let show = ref(true);
 
@@ -33,17 +49,24 @@ const checkScroll = (e) => {
 
 <style lang="scss" scoped>
 .film-list {
-  height: calc(100vh - 70px);
   width: 100%;
-  overflow-y: scroll;
+  overflow: auto;
+  height: 100px;
+  flex-grow: 1;
+  padding: 15px 15px 0;
 
   &__wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
     flex-grow: 1;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 15px;
+  }
+
+  & .n-carousel {
+    height: auto;
+    cursor: pointer;
+    margin-bottom: 10px;
   }
 }
 </style>

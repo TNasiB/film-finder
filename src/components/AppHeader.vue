@@ -2,24 +2,24 @@
   <div class="app-header">
     <div class="app-header__container">
       <p class="app-header__logo">
-      <n-icon color="#000" @click="$emit('toggle-sidebar')" class="app-header__logo-icon">
-        <grid-view-sharp /> </n-icon
-      ><span style="cursor: pointer" @click="router.push('/')">FilmFinder</span>
-      <div class="app-header__select-type">
-      <span class="app-header__select-item">Movies</span>
-      <span class="app-header__select-item">Series</span>
-    </div>
-    </p>
-    <div class="app-header__side-wrapper">
-      <n-input-group>
-        <n-input v-model:value="findValue" @keydown.enter="findFilm"/>
-        <n-button type="info" @click="findFilm">Search</n-button>
-      </n-input-group>
-      <n-avatar
-        size="large"
-        src="https://kartinkin.net/uploads/posts/2022-03/1646360045_3-kartinkin-net-p-kartinki-rik-3.png"
-      />
-    </div>
+        <n-icon
+          color="#000"
+          @click="$emit('toggle-sidebar')"
+          class="app-header__logo-icon"
+        >
+          <grid-view-sharp /> </n-icon
+        ><span style="cursor: pointer" @click="router.push('/')">FilmFinder</span>
+      </p>
+      <div class="app-header__side-wrapper">
+        <n-input-group>
+          <n-input v-model:value="findValue" @keydown.enter="findFilm" />
+          <n-button type="info" @click="findFilm">Search</n-button>
+        </n-input-group>
+        <n-avatar
+          size="large"
+          src="https://kartinkin.net/uploads/posts/2022-03/1646360045_3-kartinkin-net-p-kartinki-rik-3.png"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -29,23 +29,23 @@ import { ref } from "vue";
 import { NAvatar, NIcon, NInput, NInputGroup, NButton } from "naive-ui";
 import { GridViewSharp } from "@vicons/material";
 import { useMovieStore } from "../stores/movies.js";
-import router from '@/router'
+import router from "@/router";
 
 const movieStore = useMovieStore();
 
-const findValue = ref('')
+const findValue = ref("");
 //FIXME: ДОбавить историю поиска и просмотра
 const findFilm = () => {
   if (findValue.value) {
     movieStore.findFilm(findValue.value).then(() => {
       router.push({
-        name: 'keyword',
-        params: { keyword: findValue.value }
-      })
-      findValue.value = ""
-    })
+        name: "keyword",
+        params: { keyword: findValue.value },
+      });
+      findValue.value = "";
+    });
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -56,7 +56,7 @@ const findFilm = () => {
   padding: 5px 20px;
   font-size: 25px;
   color: #fff;
-  
+
   &__container {
     max-width: 1368px;
     margin: 0 auto;

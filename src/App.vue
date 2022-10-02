@@ -32,8 +32,7 @@ const drawerShow = ref(false);
   overflow: hidden;
 
   &__workplace {
-    margin: 0 auto;
-    max-width: 1368px;
+    flex-grow: 1;
   }
 
   &__workplace-title {

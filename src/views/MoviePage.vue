@@ -44,7 +44,7 @@
 
 <script setup>
 import { defineProps, reactive, computed, onMounted, watch } from "vue";
-import { NRate, NButton, NTag } from "naive-ui";
+import { NRate, NTag } from "naive-ui";
 import { fetchFilm } from "@/services/movieApi/rest/fetchTop.js";
 import { loadScript, unloadScript } from "vue-plugin-load-script";
 import dayjs from "dayjs";

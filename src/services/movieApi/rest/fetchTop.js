@@ -31,3 +31,10 @@ export const fecthFiltersInfo = () =>
     url: "v2.2/films/filters",
     method: "GET",
   });
+
+export const fetchPremiers = (params) =>
+  makeRequest({
+    url: "v2.2/films/premieres",
+    method: "GET",
+    params,
+  });
